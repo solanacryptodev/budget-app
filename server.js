@@ -1,16 +1,20 @@
-/*var path = require('path');
-var express = require('express');
+//Install express server
+const express = require('express');
+const path = require('path');
+const app = express();
 
-var app = express();
+// Serve only the static files form the dist directory
+app.use(express.static('./dist/budget-app'));
 
-app.use(express.static(path.join(__dirname, 'dist')));
-app.set('port', process.env.PORT || 8080);
-
-var server = app.listen(app.get('port'), function() {
-  console.log('listening on port ', server.address().port);
+app.get('/*', function(req,res) {
+    
+res.sendFile(path.join(__dirname,'/dist/budget-app/index.html'));
 });
-*/
-const http = require("http");
+
+// Start the app by listening on the default Heroku port
+app.listen(process.env.PORT || 8080);
+
+/*const http = require("http");
 const path = require("path");
 const fs = require("fs");
 
@@ -100,4 +104,4 @@ const server = http.createServer((req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));*/
